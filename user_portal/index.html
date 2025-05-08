@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CoDeKu Certificate Verification</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .container {
+        width: 90%;
+        max-width: 600px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+      }
+
+      .logo h2 {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+        background: linear-gradient(
+          135deg,
+          #0d47a1,
+          #42a5f5
+        ); /* dark to light blue */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .logo {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .logo img {
+        max-width: 200px;
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .verification-form {
+        display: flex;
+        flex-direction: column;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 14px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      .result {
+        margin-top: 30px;
+        padding: 20px;
+        border-radius: 5px;
+        display: none;
+      }
+      .valid {
+        background-color: #dff0d8;
+        border: 1px solid #d6e9c6;
+        color: #3c763d;
+      }
+      .invalid {
+        background-color: #f2dede;
+        border: 1px solid #ebccd1;
+        color: #a94442;
+      }
+      .certificate-details {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      .detail-row {
+        display: flex;
+        margin-bottom: 10px;
+      }
+      .detail-label {
+        font-weight: 600;
+        width: 150px;
+      }
+      .detail-value {
+        flex-grow: 1;
+      }
+      .loading {
+        text-align: center;
+        display: none;
+      }
+      .loading:after {
+        content: ".";
+        animation: dots 1s steps(5, end) infinite;
+      }
+      @keyframes dots {
+        0%,
+        20% {
+          content: ".";
+        }
+        40% {
+          content: "..";
+        }
+        60% {
+          content: "...";
+        }
+        80%,
+        100% {
+          content: "";
+        }
+      }
+    </style> 
+  
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <!-- Replace with your logo -->
+        <img src="./logo.png" alt="logo" id="logo-image" />
+        <h2>CoDeKu DevOps Academy</h2>
+        <hr />
+      </div>
+      <h1>Certificate Verification Portal</h1>
+      <div class="verification-form">
+        <div class="form-group">
+          <label for="certificate-id">Certificate ID</label>
+          <input
+            type="text"
+            id="certificate-id"
+            placeholder="Enter certificate ID"
+            required
+          />
+        </div>
+        <button id="verify-btn">Verify Certificate</button>
+        <div class="loading" id="loading">Verifying</div>
+      </div>
+      <div class="result" id="result">
+        <h2 id="result-heading"></h2>
+        <p id="result-message"></p>
+        <div class="certificate-details" id="certificate-details"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const verifyBtn = document.getElementById("verify-btn");
+        const certificateIdInput = document.getElementById("certificate-id");
+        const resultDiv = document.getElementById("result");
+        const resultHeading = document.getElementById("result-heading");
+        const resultMessage = document.getElementById("result-message");
+        const certificateDetails = document.getElementById(
+          "certificate-details"
+        );
+        const loading = document.getElementById("loading");
+
+        verifyBtn.addEventListener("click", function () {
+          const certificateId = certificateIdInput.value.trim();
+
+          if (!certificateId) {
+            alert("Please enter a certificate ID");
+            return;
+          }
+
+          // Show loading indicator
+          loading.style.display = "block";
+          resultDiv.style.display = "none";
+
+          // AJAX request to verify the certificate
+          fetch("verify.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: "certificate_id=" + encodeURIComponent(certificateId),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              loading.style.display = "none";
+              resultDiv.style.display = "block";
+
+              if (data.valid) {
+                resultDiv.className = "result valid";
+                resultHeading.textContent = "Valid Certificate";
+                resultMessage.textContent =
+                  "This certificate is authentic and has been verified.";
+
+                // Display certificate details
+                let detailsHtml = "";
+                detailsHtml += createDetailRow("Name", data.name);
+                detailsHtml += createDetailRow("Course", data.course);
+                detailsHtml += createDetailRow("Issue Date", data.issue_date);
+                detailsHtml += createDetailRow(
+                  "Expiry Date",
+                  data.expiry_date || "N/A"
+                );
+
+                certificateDetails.innerHTML = detailsHtml;
+                certificateDetails.style.display = "block";
+              } else {
+                resultDiv.className = "result invalid";
+                resultHeading.textContent = "Invalid Certificate";
+                resultMessage.textContent =
+                  "This certificate ID could not be verified. Please check the ID and try again.";
+                certificateDetails.style.display = "none";
+              }
+            })
+            .catch((error) => {
+              loading.style.display = "none";
+              resultDiv.className = "result invalid";
+              resultDiv.style.display = "block";
+              resultHeading.textContent = "Verification Error";
+              resultMessage.textContent =
+                "An error occurred during verification. Please try again later.";
+              certificateDetails.style.display = "none";
+              console.error("Error:", error);
+            });
+        });
+
+        function createDetailRow(label, value) {
+          return `
+                    <div class="detail-row">
+                        <div class="detail-label">${label}:</div>
+                        <div class="detail-value">${value}</div>
+                    </div>
+                `;
+        }
+      });
+    </script>
+  </body>
+</html>
