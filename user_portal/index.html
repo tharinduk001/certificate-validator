@@ -8,6 +8,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
       body {
         font-family: "Poppins", sans-serif;
@@ -273,8 +274,21 @@
               if (data.valid) {
                 resultDiv.className = "result valid";
                 resultHeading.textContent = "✅Valid Certificate";
+                // Trigger confetti animation
+                confetti({
+                  particleCount: 100,
+                  spread: 70,
+                  origin: { y: 0.6 },
+                });
+
                 resultMessage.textContent =
                   "This certificate is authentic and has been verified.";
+
+                confetti({
+                  particleCount: 100,
+                  spread: 70,
+                  origin: { y: 0.6 },
+                });
 
                 // Display certificate details
                 let detailsHtml = "";
