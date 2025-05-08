@@ -21,8 +21,8 @@ if (empty($username) || empty($password)) {
 // In a real application, you would store these credentials in a database
 // For simplicity, we're using hardcoded values
 // IMPORTANT: Change these values before deploying to production!
-$validUsername = 'tharindu';
-$validPasswordHash = password_hash('tharindu@codeku', PASSWORD_DEFAULT); // Use password_hash when setting up
+$validUsername = '';
+$validPasswordHash = password_hash('', PASSWORD_DEFAULT); // Use password_hash when setting up
 
 // Check if the credentials are valid
 if ($username === $validUsername && password_verify($password, $validPasswordHash)) {
