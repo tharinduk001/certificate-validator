@@ -4,128 +4,178 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CoDeKu Certificate Verification</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f5f5f5;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
         margin: 0;
         padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
+        color: #fff;
       }
+
       .container {
         width: 90%;
         max-width: 600px;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        padding: 30px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        padding: 40px 30px;
+        animation: fadeIn 0.7s ease;
       }
 
-      .logo h2 {
-        margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-
-        background: linear-gradient(
-          135deg,
-          #0d47a1,
-          #42a5f5
-        ); /* dark to light blue */
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent;
+      @keyframes fadeIn {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
 
       .logo {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
       }
+
       .logo img {
-        max-width: 200px;
+        max-width: 180px;
       }
+
+      .logo h2 {
+        margin: 0;
+        font-size: 1.8em;
+        background: linear-gradient(135deg, #5c9efb, #428df5, #3663de);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
       h1 {
-        color: #333;
+        font-size: 1.6em;
         text-align: center;
+        color: #fff;
         margin-bottom: 30px;
       }
+
       .verification-form {
         display: flex;
         flex-direction: column;
       }
+
       .form-group {
         margin-bottom: 20px;
       }
+
       label {
         display: block;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         font-weight: 600;
       }
+
       input {
         width: 100%;
         padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
         box-sizing: border-box;
+        outline: none;
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        transition: border 0.3s;
       }
+
+      input::placeholder {
+        color: white;
+        opacity: 0.75; /* Ensures it's fully visible */
+      }
+
+      input:focus {
+        border: 2px solid #42a5f5;
+      }
+
       button {
-        background-color: #4caf50;
+        background-color: #42a5f5;
         color: white;
         border: none;
         padding: 14px 20px;
-        border-radius: 5px;
+        border-radius: 8px;
         font-size: 16px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: all 0.3s;
+        font-weight: 600;
       }
+
       button:hover {
-        background-color: #45a049;
+        background-color: #2196f3;
+        transform: scale(1.03);
       }
+
       .result {
         margin-top: 30px;
         padding: 20px;
-        border-radius: 5px;
+        border-radius: 8px;
         display: none;
       }
+
       .valid {
-        background-color: #dff0d8;
-        border: 1px solid #d6e9c6;
-        color: #3c763d;
+        background-color: rgba(76, 175, 80, 0.2);
+        border: 1px solid #66bb6a;
+        color: #a5d6a7;
       }
+
       .invalid {
-        background-color: #f2dede;
-        border: 1px solid #ebccd1;
-        color: #a94442;
+        background-color: rgba(244, 67, 54, 0.2);
+        border: 1px solid #ef9a9a;
+        color: #ef5350;
       }
+
       .certificate-details {
-        margin-top: 20px;
+        margin-top: 15px;
         padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background-color: rgba(255, 255, 255, 0.05);
       }
+
       .detail-row {
         display: flex;
         margin-bottom: 10px;
+        font-size: 14px;
       }
+
       .detail-label {
         font-weight: 600;
-        width: 150px;
+        width: 120px;
       }
+
       .detail-value {
         flex-grow: 1;
       }
+
       .loading {
         text-align: center;
         display: none;
+        margin-top: 10px;
+        color: #bbb;
       }
+
       .loading:after {
         content: ".";
         animation: dots 1s steps(5, end) infinite;
       }
+
       @keyframes dots {
         0%,
         20% {
@@ -142,8 +192,7 @@
           content: "";
         }
       }
-    </style> 
-  
+    </style>
   </head>
   <body>
     <div class="container">
