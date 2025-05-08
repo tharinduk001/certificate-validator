@@ -22,7 +22,7 @@ if (empty($username) || empty($password)) {
 // For simplicity, we're using hardcoded values
 // IMPORTANT: Change these values before deploying to production!
 $validUsername = 'tharindu';
-$validPasswordHash = password_hash('KalharaTharindu1!', PASSWORD_DEFAULT); // Use password_hash when setting up
+$validPasswordHash = password_hash('tharindu@codeku', PASSWORD_DEFAULT); // Use password_hash when setting up
 
 // Check if the credentials are valid
 if ($username === $validUsername && password_verify($password, $validPasswordHash)) {
