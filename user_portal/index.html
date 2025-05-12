@@ -12,7 +12,7 @@
     <style>
       body {
         font-family: "Poppins", sans-serif;
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        background: linear-gradient(135deg, #5c1d1c, #992c2c, #e05e3b);
         margin: 0;
         padding: 0;
         display: flex;
@@ -50,19 +50,14 @@
       }
 
       .logo img {
-        max-width: 220px;
-        transition: transform 0.3s ease;
-      }
-
-      .logo img {
-        max-width: 220px;
+        max-width: 100px;
         transition: transform 0.3s ease;
       }
 
       .logo h2 {
         margin: 0;
         font-size: 2.2em;
-        background: linear-gradient(135deg, #5c9efb, #428df5, #3d69e2);
+        background: linear-gradient(135deg, #ee7b45, #fc6c6e, #fcb934);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -109,11 +104,11 @@
       }
 
       input:focus {
-        border: 2px solid #42a5f5;
+        border: 2px solid #ff5e62;
       }
 
       button {
-        background-color: #42a5f5;
+        background-color: #ff5e62;
         color: white;
         border: none;
         padding: 14px 20px;
@@ -125,7 +120,7 @@
       }
 
       button:hover {
-        background-color: #2196f3;
+        background-color: #ff3019;
         transform: scale(1.03);
       }
 
@@ -137,15 +132,15 @@
       }
 
       .valid {
-        background-color: rgba(76, 175, 80, 0.2);
-        border: 1px solid #66bb6a;
-        color: #f5fff5;
+        background-color: rgba(255, 120, 70, 0.2);
+        border: 1px solid #ff7846;
+        color: #fff;
       }
 
       .invalid {
         background-color: rgba(244, 67, 54, 0.2);
         border: 1px solid #ef9a9a;
-        color: #ef5350;
+        color: #facbca;
       }
 
       .invalid p {
@@ -155,7 +150,7 @@
       .certificate-details {
         margin-top: 15px;
         padding: 15px;
-        border: 1px solid #ccc;
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 6px;
         background-color: rgba(255, 255, 255, 0.05);
       }
@@ -179,7 +174,7 @@
         text-align: center;
         display: none;
         margin-top: 10px;
-        color: #bbb;
+        color: #ffcbcb;
       }
 
       .loading:after {
@@ -210,7 +205,7 @@
       <div class="logo">
         <!-- Replace with your logo -->
         <img src="./logo.png" alt="logo" id="logo-image" />
-        <h2>CoDeKu DevOps Academy</h2>
+        <h2>Yaha Wellness Academy</h2>
         <hr />
       </div>
       <h1>Certificate Verification Portal</h1>
@@ -279,6 +274,7 @@
                   particleCount: 100,
                   spread: 70,
                   origin: { y: 0.6 },
+                  colors: ["#ff9966", "#ff5e62", "#ff3019"],
                 });
 
                 resultMessage.textContent =
@@ -288,6 +284,7 @@
                   particleCount: 100,
                   spread: 70,
                   origin: { y: 0.6 },
+                  colors: ["#ff9966", "#ff5e62", "#ff3019"],
                 });
 
                 // Display certificate details

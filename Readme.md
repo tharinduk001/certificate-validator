@@ -1,7 +1,6 @@
 # Deployment Steps
 
 1. Database Setup
-
    - Log into your Hostinger account and access phpMyAdmin
    - Create a new database (or use an existing one)
    - Run the SQL code in `initate.sql`

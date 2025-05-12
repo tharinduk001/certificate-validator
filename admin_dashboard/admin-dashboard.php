@@ -47,7 +47,7 @@ try {
       body {
         margin: 0;
         font-family: "Poppins", sans-serif;
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        background: linear-gradient(135deg, #5c1d1c, #992c2c, #e05e3b);
         min-height: 100vh;
         display: flex;
         justify-content: center;
@@ -75,7 +75,7 @@ try {
       }
 
       h1 {
-        background: linear-gradient(135deg, #5c9efb, #428df5, #3663de);
+        background: linear-gradient(135deg, #ee7b45, #fc6c6e, #fcb934);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -93,14 +93,14 @@ try {
         color: white;
         text-decoration: none;
         padding: 6px 12px;
-        background-color: #f44336;
+        background-color: #ff3019;
         border-radius: 8px;
         font-weight: bold;
         transition: 0.3s;
       }
 
       .logout-btn:hover {
-        background-color: #d32f2f;
+        background-color: #cc2613;
       }
 
       .controls {
@@ -131,7 +131,7 @@ try {
       }
 
       .add-btn {
-        background: linear-gradient(135deg, #5c9efb, #428df5);
+        background: linear-gradient(135deg, #ff9966, #ff5e62);
         border: none;
         padding: 10px 20px;
         border-radius: 8px;
@@ -142,7 +142,7 @@ try {
       }
 
       .add-btn:hover {
-        background: linear-gradient(135deg, #3663de, #428df5);
+        background: linear-gradient(135deg, #ff5e62, #ff3019);
         transform: scale(1.05);
       }
 
@@ -181,12 +181,12 @@ try {
       }
 
       .edit {
-        background-color: #4caf50;
+        background-color: #ff9966;
         color: white;
       }
 
       .delete {
-        background-color: #f44336;
+        background-color: #ff3019;
         color: white;
       }
 
@@ -203,7 +203,7 @@ try {
       }
 
       .modal-content {
-        background-color: #1e2d3b;
+        background-color: #7a2e20;
         margin: 80px auto;
         padding: 20px;
         border-radius: 10px;
@@ -227,7 +227,7 @@ try {
       }
 
       .close {
-        color: #aaa;
+        color: #ffcbcb;
         position: absolute;
         right: 20px;
         top: 10px;
@@ -256,7 +256,7 @@ try {
       }
 
       .submit-btn {
-        background: linear-gradient(135deg, #5c9efb, #428df5);
+        background: linear-gradient(135deg, #ff9966, #ff5e62);
         border: none;
         padding: 10px 16px;
         border-radius: 8px;
@@ -268,7 +268,7 @@ try {
       }
 
       .submit-btn:hover {
-        background: linear-gradient(135deg, #3663de, #428df5);
+        background: linear-gradient(135deg, #ff5e62, #ff3019);
       }
 
       .input-group {
@@ -283,7 +283,7 @@ try {
       }
 
       .generate-btn {
-        background: #616161;
+        background: #b34832;
         border: none;
         border-radius: 6px;
         padding: 10px 12px;
@@ -302,12 +302,14 @@ try {
       }
 
       .success-message {
-        background-color: #4caf50;
+        background-color: rgba(255, 120, 70, 0.3);
+        border: 1px solid #ff7846;
         color: white;
       }
 
       .error-message {
-        background-color: #f44336;
+        background-color: rgba(244, 67, 54, 0.3);
+        border: 1px solid #ef9a9a;
         color: white;
       }
 
@@ -322,7 +324,7 @@ try {
   <body>
     <div class="container">
       <header>
-        <h1>CoDeKu Certificate Management</h1>
+        <h1>Yaha Wellness Certificate Management</h1>
         <div class="user-info">
           <span class="username"
             >Logged in as:
@@ -461,7 +463,7 @@ try {
         <button
           id="confirm-delete"
           class="submit-btn"
-          style="background-color: #f44336"
+          style="background: linear-gradient(135deg, #ff3019, #cc2613)"
         >
           Delete
         </button>
