@@ -43,43 +43,52 @@ try {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Certificate Admin Dashboard</title>
-    <style>
-      body {
+      <style>
+      /* Base Styles */
+      * {
+        box-sizing: border-box;
         margin: 0;
+        padding: 0;
+      }
+
+      body {
         font-family: "Poppins", sans-serif;
         background: linear-gradient(135deg, #5c1d1c, #992c2c, #e05e3b);
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        padding: 40px 20px;
+        padding: 20px;
         color: white;
       }
 
-      .dashboard-container {
+      /* Main Container */
+      .container {
         width: 100%;
-        max-width: 1100px;
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(15px);
-        border-radius: 16px;
-        padding: 30px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
       }
 
+      /* Header Styles */
       header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
       }
 
       h1 {
-        background: linear-gradient(135deg, #ee7b45, #fc6c6e, #fcb934);
+        background: linear-gradient(135deg, #ffae00, #ff7846, #fc6c6e);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        color: transparent;
+        font-size: 1.8rem;
         margin: 0;
       }
 
@@ -92,92 +101,140 @@ try {
       .logout-btn {
         color: white;
         text-decoration: none;
-        padding: 6px 12px;
+        padding: 8px 16px;
         background-color: #ff3019;
         border-radius: 8px;
-        font-weight: bold;
-        transition: 0.3s;
+        font-weight: 500;
+        transition: all 0.3s ease;
       }
 
       .logout-btn:hover {
         background-color: #cc2613;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(204, 38, 19, 0.4);
       }
 
+      /* Dashboard Card */
+      .dashboard-card {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      /* Controls Section */
       .controls {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 20px;
+        margin-bottom: 25px;
         gap: 20px;
-        flex-wrap: wrap;
       }
 
       .search-bar {
         flex: 1;
+        position: relative;
       }
 
       input[type="text"] {
         width: 100%;
-        padding: 10px 14px;
+        padding: 12px 16px;
         border: none;
         border-radius: 8px;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.15);
         color: white;
         font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
       }
 
       input::placeholder {
-        color: #eee;
+        color: rgba(255, 255, 255, 0.7);
       }
 
       .add-btn {
         background: linear-gradient(135deg, #ff9966, #ff5e62);
+        padding: 12px 20px;
         border: none;
-        padding: 10px 20px;
         border-radius: 8px;
         color: white;
-        font-weight: bold;
+        font-weight: 600;
         cursor: pointer;
-        transition: 0.3s;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 94, 98, 0.3);
       }
 
       .add-btn:hover {
         background: linear-gradient(135deg, #ff5e62, #ff3019);
-        transform: scale(1.05);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255, 94, 98, 0.4);
+      }
+
+      /* Table Styles */
+      .table-container {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
       }
 
       table {
         width: 100%;
-        margin-top: 25px;
         border-collapse: collapse;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        overflow: hidden;
       }
 
-      th,
-      td {
-        padding: 14px 16px;
+      th, td {
+        padding: 16px;
         text-align: left;
       }
 
       th {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.1);
         font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        position: relative;
+      }
+
+      th:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+      }
+
+      tr {
+        transition: all 0.3s ease;
+      }
+
+      tr:hover {
+        background: rgba(255, 255, 255, 0.05);
       }
 
       tr:nth-child(even) {
-        background-color: rgba(255, 255, 255, 0.03);
+        background-color: rgba(255, 255, 255, 0.02);
       }
 
+      /* Action Buttons */
       .action-btn {
-        padding: 6px 12px;
+        padding: 8px 14px;
         border: none;
         border-radius: 6px;
         cursor: pointer;
         font-size: 14px;
-        font-weight: bold;
-        margin-right: 5px;
+        font-weight: 500;
+        margin-right: 8px;
+        transition: all 0.3s ease;
       }
 
       .edit {
@@ -185,11 +242,24 @@ try {
         color: white;
       }
 
+      .edit:hover {
+        background-color: #ff7846;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 120, 70, 0.4);
+      }
+
       .delete {
         background-color: #ff3019;
         color: white;
       }
 
+      .delete:hover {
+        background-color: #cc2613;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(204, 38, 19, 0.4);
+      }
+
+      /* Modal Styles */
       .modal {
         display: none;
         position: fixed;
@@ -199,125 +269,288 @@ try {
         width: 100%;
         height: 100%;
         overflow: auto;
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
       }
 
       .modal-content {
-        background-color: #7a2e20;
+        background: linear-gradient(135deg, #7a2e20, #b34832);
         margin: 80px auto;
-        padding: 20px;
-        border-radius: 10px;
-        width: calc(100% - 40px); /* ensures margin on both left and right */
+        padding: 30px;
+        border-radius: 16px;
+        width: 90%;
         max-width: 500px;
         color: white;
-        box-sizing: border-box;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
         position: relative;
+      }
+
+      .modal h2 {
+        margin-bottom: 20px;
+        color: rgba(255, 255, 255, 0.95);
+      }
+
+      .close {
+        color: rgba(255, 255, 255, 0.8);
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .close:hover {
+        color: white;
+        transform: rotate(90deg);
+      }
+
+      /* Form Styles */
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .input-group {
+        display: flex;
+        gap: 10px;
       }
 
       .modal input[type="text"],
       .modal input[type="date"],
       .modal select {
         width: 100%;
-        padding: 10px;
+        padding: 12px 16px;
         border: none;
         border-radius: 8px;
         background: rgba(255, 255, 255, 0.15);
         color: white;
-        box-sizing: border-box;
+        font-size: 14px;
+        transition: all 0.3s ease;
       }
 
-      .close {
-        color: #ffcbcb;
-        position: absolute;
-        right: 20px;
-        top: 10px;
-        font-size: 24px;
+      .modal input:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+      }
+
+      .generate-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        color: white;
+        font-weight: 600;
         cursor: pointer;
+        transition: all 0.3s ease;
+        /* white-space: wordwrap; */
       }
 
-      .form-group {
-        margin-bottom: 15px;
-      }
-
-      label {
-        display: block;
-        margin-bottom: 6px;
-        font-weight: 500;
-      }
-
-      input[type="date"],
-      .modal input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        border: none;
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.15);
-        color: white;
+      .generate-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
       }
 
       .submit-btn {
         background: linear-gradient(135deg, #ff9966, #ff5e62);
         border: none;
-        padding: 10px 16px;
+        padding: 12px 20px;
         border-radius: 8px;
         color: white;
-        font-weight: bold;
+        font-weight: 600;
         cursor: pointer;
-        transition: 0.3s;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 94, 98, 0.3);
         margin-top: 10px;
+        width: 100%;
       }
 
       .submit-btn:hover {
         background: linear-gradient(135deg, #ff5e62, #ff3019);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255, 94, 98, 0.4);
       }
 
-      .input-group {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-
-      .input-group input {
-        flex: 1;
-        min-width: 0;
-      }
-
-      .generate-btn {
-        background: #b34832;
-        border: none;
-        border-radius: 6px;
-        padding: 10px 12px;
-        color: white;
-        cursor: pointer;
-        white-space: nowrap;
-      }
-
+      /* Message Styles */
       .success-message,
       .error-message {
-        margin-top: 15px;
-        padding: 10px 16px;
+        margin: 20px 0;
+        padding: 12px 20px;
         border-radius: 8px;
         display: none;
-        font-weight: bold;
+        font-weight: 500;
+        animation: fadeIn 0.5s ease;
       }
 
       .success-message {
-        background-color: rgba(255, 120, 70, 0.3);
-        border: 1px solid #ff7846;
-        color: white;
+        background-color: rgba(76, 175, 80, 0.2);
+        border-left: 4px solid #4CAF50;
+        color: #E8F5E9;
       }
 
       .error-message {
-        background-color: rgba(244, 67, 54, 0.3);
-        border: 1px solid #ef9a9a;
-        color: white;
+        background-color: rgba(244, 67, 54, 0.2);
+        border-left: 4px solid #F44336;
+        color: #FFEBEE;
       }
 
-      @media screen and (max-width: 600px) {
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Responsive Styles */
+      @media screen and (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 15px;
+          padding: 15px;
+        }
+
+        .user-info {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .dashboard-card {
+          padding: 20px;
+        }
+
         .controls {
           flex-direction: column;
           align-items: stretch;
         }
+
+        .search-bar {
+          width: 100%;
+          margin-bottom: 15px;
+        }
+
+        .add-btn {
+          width: 100%;
+        }
+
+        /* Table responsive styles */
+        table, thead, tbody, th, td, tr {
+          display: block;
+        }
+
+        table {
+          border-radius: 16px;
+          overflow: hidden;
+        }
+
+        thead tr {
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+        }
+
+        tr {
+          margin-bottom: 15px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        tr:last-child {
+          margin-bottom: 0;
+          border-bottom: none;
+        }
+
+        td {
+          border: none;
+          position: relative;
+          padding: 12px 12px 12px 50%;
+          min-height: 40px;
+        }
+
+        td:before {
+          position: absolute;
+          left: 12px;
+          width: 45%;
+          padding-right: 10px;
+          white-space: nowrap;
+          content: attr(data-label);
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.8);
+        }
+
+        .action-btn {
+          display: inline-block;
+          margin-bottom: 5px;
+        }
+
+        .modal-content {
+          margin: 60px auto;
+          padding: 20px;
+          width: 95%;
+        }
+
+        .input-group {
+          flex-direction: column;
+        }
+
+        .generate-btn {
+          width: 100%;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        .dashboard-card {
+          padding: 15px;
+        }
+
+        .modal-content {
+          padding: 15px;
+        }
+
+        td {
+          padding: 10px 10px 10px 45%;
+        }
+
+        .action-btn {
+          width: 100%;
+          margin-right: 0;
+          text-align: center;
+        }
+      }
+
+      /* Visual Enhancements */
+      .dashboard-card, header, .table-container {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      button, .logout-btn {
+        -webkit-tap-highlight-color: transparent;
+        transition: transform 0.1s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      button:active, .logout-btn:active {
+        transform: scale(0.98);
+      }
+
+      .no-records {
+        text-align: center;
+        padding: 30px;
+        color: rgba(255, 255, 255, 0.7);
+        font-style: italic;
       }
     </style>
   </head>
@@ -725,6 +958,18 @@ try {
               generatedIds.add(certificateIdCell.textContent.trim());
             }
           });
+
+    // Add data-labels for mobile responsive table
+    document.querySelectorAll('#certificates-table tbody tr').forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const labels = ['Certificate ID', 'Recipient Name', 'Course Name', 'Issue Date', 'Expiry Date', 'Actions'];
+        
+        cells.forEach((cell, index) => {
+            if (index < labels.length) {
+                cell.setAttribute('data-label', labels[index]);
+            }
+        });
+    });
 
         // Helper functions
         function showError(message) {
