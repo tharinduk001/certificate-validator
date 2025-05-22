@@ -1,6 +1,11 @@
 <?php
-$host = 'localhost'; // Usually localhost for Hostinger
-$dbname = 'u420126502_yaha'; // Replace with your database name
-$username = 'u420126502_cjruhunage'; // Replace with your database username
-$password = 'G=4l=2ClBQ!F'; // Replace with your database password
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+$host = $_ENV['DB_HOST'];
+$dbname = $_ENV['DB_NAME'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
 ?>

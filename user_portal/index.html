@@ -31,6 +31,7 @@
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         padding: 40px 30px;
         animation: fadeIn 0.7s ease;
+        position: relative;
       }
 
       @keyframes fadeIn {
@@ -198,10 +199,45 @@
           content: "";
         }
       }
+      
+      /* Home button styles */
+      .home-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .home-button:hover {
+        background-color: #ff5e62;
+        transform: scale(1.1);
+      }
+      
+      .home-icon {
+        width: 24px;
+        height: 24px;
+        fill: white;
+      }
     </style>
   </head>
   <body>
     <div class="container">
+      <!-- Home Button -->
+      <a href="https://web.yahawellness.com" class="home-button" title="Return to Home">
+        <svg class="home-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+        </svg>
+      </a>
+      
       <div class="logo">
         <!-- Replace with your logo -->
         <img src="./logo.png" alt="logo" id="logo-image" />

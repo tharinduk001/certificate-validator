@@ -13,12 +13,7 @@ if (empty($certificateId)) {
     echo json_encode(['valid' => false, 'message' => 'Certificate ID is required']);
     exit;
 }
-
-// Database connection configuration
-$host = 'localhost'; // Usually localhost for Hostinger
-$dbname = 'u420126502_yaha'; // Replace with your database name
-$username = 'u420126502_cjruhunage'; // Replace with your database username
-$password = 'G=4l=2ClBQ!F'; // Replace with your database password
+require_once __DIR__ . '/../admin_dashboard/config.php';
 
 try {
     // Create database connection
