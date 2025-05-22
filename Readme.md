@@ -9,3 +9,5 @@
 2. File Upload
    - Upload all the files in both admin_dashboard and user_portal
    - make sure to change the neccessary secrets in files : admin-auth.php / config.php / verify.php
+
+## _The Project Has Been Secured_
